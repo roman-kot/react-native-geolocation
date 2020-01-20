@@ -309,8 +309,8 @@ RCT_EXPORT_METHOD(getCurrentPosition:(RNCGeolocationOptions)options
 
   // Check if previous recorded location exists and is good enough
   if (_lastLocationEvent &&
-      [NSDate date].timeIntervalSince1970 - [RCTConvert NSTimeInterval:_lastLocationEvent[@"timestamp"]] < options.maximumAge &&
-      [_lastLocationEvent[@"coords"][@"accuracy"] doubleValue] <= options.accuracy) {
+      [NSDate date].timeIntervalSince1970 - [RCTConvert NSTimeInterval:_lastLocationEvent[@"timestamp"]] < options.maximumAge && 
+      [_lastLocationEvent[@"coords"][@"accuracy"] doubleValue] <= options.accuracy || options.accuracy == kCLLocationAccuracyBest) {
 
     // Call success block with most recent known location
     successBlock(@[_lastLocationEvent]);
